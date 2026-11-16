@@ -18,6 +18,8 @@
 <!-- Bij Kenmerken staat welke technieken zijn gebruikt en hoe. Wat is de HTML structuur? Wat zijn de belangrijkste dingen in CSS? Wat is er met Javascript gedaan en hoe? Misschien heb je een framwork of library gebruikt? -->
 
 ## Installatie
+<img width="1091" height="187" alt="image" src="https://github.com/user-attachments/assets/0c68a34a-66f0-4662-87de-5d8a37ff2120" />
+
 
 ## Gebruik
 
