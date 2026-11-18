@@ -2,4 +2,6 @@
 layout: layouts/base.html
 title: SnappThis
 ---
-<h1>SnappThis</h1>
+{% from "components/header.html" import header %}
+
+{{ header(title="Welcome back") }}
