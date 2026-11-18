@@ -1,0 +1,32 @@
+---
+layout: layouts/base.html
+title: Your snappmaps
+pagination:
+  data: groups
+  size: 1
+  alias: group
+permalink: "/groups/{{ group.slug }}/"
+---
+{% from "components/header.html" import header %}
+
+{{ header(title="Your snappmaps", showBackButton=true, backUrl="/groups") }}
+
+<ul class="groups">
+    {% for snapmap in group.snappmaps %}
+        <li class="group-list-container">
+            <div class="group-list-stats snappmap">
+                <h2>
+                    <a href="/snappmaps/{{ snapmap.slug }}">
+                        {{ snapmap.name }}
+                    </a>
+                </h2>
+
+                <p>
+                    {{ snapmap.time_start }} - {{ snapmap.time_end }}
+                </p>
+            </div>
+        </li>
+    {% endfor %}
+</ul>
+
+{% include "components/footer.html" %}
