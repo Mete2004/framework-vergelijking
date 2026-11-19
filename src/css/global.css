@@ -182,3 +182,116 @@ header {
 .footer-nav-item:first-child .footer-nav-icon {
     width: calc(var(--bar-height) * 0.44);
 }
+
+/* Groepsmenu: pijltje in de groepenlijst (uit groups/+page.svelte, branch 283-task/group-menu-arrow-and-remove-roll) */
+
+/* Kleine afstand tussen de groepsnaam en het pijltje */
+.group-list-container {
+    gap: var(--spacing-xs);
+}
+
+/* De naam niet laten meegroeien (.groups a heeft flex: 1), zodat het pijltje er direct naast staat.
+   Alleen in 11ty: .groups ervoor, anders wint .groups a (Svelte maakt de selector zelf specifieker met een scope-class) */
+.groups .group-link {
+    flex: none;
+}
+
+/* De iconen rechts houden: de lege ruimte komt links van de iconen */
+.group-list-interactive {
+    margin-left: auto;
+}
+
+/* Pijltje rechts van de groepsnaam. Zelfde kleur als de iconen: wit haalt op de lichte achtergrond het contrast van 3:1 niet (WCAG 1.4.11).
+   Alleen in 11ty: .groups ervoor, om dezelfde reden als bij .group-link */
+.groups .menu-link {
+    flex: none; /* niet meegroeien zoals de groepsnaam-link (.groups a) */
+    justify-content: center;
+    width: 2rem;
+    color: var(--color-accent-blue-white-20);
+
+    &:focus-visible {
+        outline: 2px solid var(--color-accent-blue-black-30);
+        outline-offset: -2px;
+    }
+}
+
+.menu-icon {
+    width: 2rem;
+    height: 2rem;
+    fill: none;
+    stroke: currentColor; /* de lijn krijgt de tekstkleur van de link */
+    stroke-width: 2;
+}
+
+/* Menu open: pijltje draait naar boven */
+.menu-link.open .menu-icon {
+    rotate: 180deg;
+}
+
+/* Alleen draaien met animatie als de gebruiker geen minder beweging wil, net als de + in de header */
+@media (prefers-reduced-motion: no-preference) {
+    .menu-icon {
+        transition: rotate var(--transition-duration);
+    }
+}
+
+/* Alleen in 11ty: de link naar het menu eindigt op #slug. Zonder deze ruimte valt de groep onder de sticky header. */
+.groups li {
+    scroll-margin-top: var(--bar-height);
+}
+
+/* Groepsmenu: het menu zelf (uit organisms/GroupManagementMenu.svelte, branch 283-task/group-menu-arrow-and-remove-roll) */
+.group-menu {
+    container-type: inline-size; /* de breedte van het menu meten, zodat @container werkt */
+    position: relative;
+    padding: var(--spacing-s);
+    background-color: var(--color-accent-blue-white-90);
+
+    /* Driehoekje boven het menu (op de oude plek, zie sprint review) */
+    &::before {
+        content: '';
+        position: absolute;
+        top: -0.6rem;
+        /* vaste plek links, op het oog bijgesteld */
+        left: calc(.05rem + 1rem - 0.6rem);
+        width: 1.2rem;
+        height: 0.6rem;
+        background-color: var(--color-accent-blue-white-90);
+        clip-path: polygon(50% 0, 100% 100%, 0 100%); /* knipt een driehoek uit het vlak */
+    }
+}
+
+.options {
+    display: grid;
+    gap: 0.25rem;
+
+    @container (min-width: 768px) {
+        grid-template-columns: repeat(2, max-content); /* 2 kolommen, zo breed als de tekst */
+        gap: var(--spacing-m);
+    }
+}
+
+.option {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-s);
+    min-height: 2.75rem; /* groot genoeg om op te tikken */
+    width: 100%;
+    color: var(--color-accent-blue-white-20);
+    font-size: var(--font-size-h5);
+    text-align: left;
+    cursor: pointer;
+
+    &:focus-visible {
+        outline: 2px solid var(--color-accent-blue-black-30);
+        outline-offset: 2px;
+    }
+}
+
+.icon {
+    width: 1.4rem;
+    height: 1.4rem;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+}

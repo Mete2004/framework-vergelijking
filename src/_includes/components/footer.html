@@ -28,7 +28,7 @@
             <li class="footer-nav-item">
                 <a 
                     href="/groups" 
-                    class="footer-nav-link{% if page.url == '/groups/' %} active{% endif %}"
+                    class="footer-nav-link{% if page.url == '/groups/' or page.url.startsWith('/groups/menu/') %} active{% endif %}"
                     aria-label="Groups"
                 >
                     <svg

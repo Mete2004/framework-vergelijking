@@ -1,0 +1,19 @@
+---
+layout: layouts/base.html
+title: Your groups
+pagination:
+  data: groups
+  size: 1
+  alias: menuGroup
+permalink: "/groups/menu/{{ menuGroup.slug }}/"
+---
+{# Groepenoverzicht met het menu van één groep open. 11ty bouwt zo'n pagina voor elke groep,
+   omdat er geen server is die ?menu= kan lezen (zoals in SnappThis). #}
+{% from "components/header.html" import header %}
+
+{{ header(title="Your groups", showBackButton=true) }}
+
+{% set openMenu = menuGroup.slug %}
+{% include "components/group-list.html" %}
+
+{% include "components/footer.html" %}
