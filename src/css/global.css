@@ -95,3 +95,90 @@ button {
                 }
             }
         }
+    }
+
+
+/* Header (uit organisms/Header.svelte) */
+header {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: center;
+    padding-inline: var(--spacing-header-inline);
+    height: var(--bar-height);
+    background-color: var(--color-accent-blue-black-30);
+    color: var(--color-white);
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+.title {
+    grid-column: 2;
+    font-size: var(--font-size-h3);
+    width: max-content;
+    justify-self: center;
+}
+
+/* Back button */
+.go-back-link {
+    display: inline-block;
+    transition: 0.1s;
+    width: fit-content;
+
+    @media (any-pointer: fine) {
+        &:hover {
+            scale: 1.15;
+        }
+    }
+
+    svg {
+        height: calc(var(--bar-height) * 0.40);
+        width: auto;
+        fill: var(--color-white);
+    }
+}
+
+/* Footer (uit organisms/Footer.svelte) */
+.footer-nav {
+    height: var(--bar-height);
+    background-color: var(--color-accent-blue-black-30);
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.footer-nav-list {
+    display: flex;
+    justify-content: space-around;
+    height: 100%;
+    list-style: none;
+}
+
+.footer-nav-link {
+    display: flex;
+    align-items: center;
+    height: 100%;
+
+    /* Zorgt ervoor dat de hover alleen wordt toegepast op apparaten met een muis */
+    @media (any-pointer: fine) {
+        &:hover {
+            transition: var(--transition-duration);
+            scale: var(--hover-scale);
+        }
+    }
+}
+
+.footer-nav-icon {
+    height: auto;
+    width: calc(var(--bar-height) * 0.40);
+    fill: var(--color-white);
+}
+
+.footer-nav-link.active .footer-nav-icon {
+    fill: var(--color-accent-green);
+}
+
+.footer-nav-item:first-child .footer-nav-icon {
+    width: calc(var(--bar-height) * 0.44);
+}
