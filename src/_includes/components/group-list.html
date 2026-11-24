@@ -1,5 +1,5 @@
 {# Groepenlijst, gebruikt door groups/index.html (geen menu open) en groups/menu.html (één menu open). #}
-<ul class="groups">
+<ul class="groups" role="list">
     {% for group in groups %}
         {# Staat het menu van deze groep open? (openMenu komt van de pagina) #}
         {% set isOpen = openMenu == group.slug %}
@@ -18,7 +18,8 @@
                 <a
                     href="{% if isOpen %}/groups/#{{ group.slug }}{% else %}/groups/menu/{{ group.slug }}/#{{ group.slug }}{% endif %}"
                     class="menu-link{% if isOpen %} open{% endif %}"
-                    aria-label="{% if isOpen %}Close the menu of {{ group.name }}{% else %}Manage {{ group.name }}{% endif %}"
+                    aria-label="Menu of {{ group.name }}"
+                    aria-expanded="{% if isOpen %}true{% else %}false{% endif %}"
                 >
                     <svg class="menu-icon" viewBox="0 0 24 24" aria-hidden="true">
                         <path d="M6 9l6 6 6-6" /> <!-- pijl naar beneden -->

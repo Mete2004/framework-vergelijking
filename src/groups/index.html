@@ -1,11 +1,14 @@
 ---
 layout: layouts/base.html
-title: Your groups
+title: Your groups | SnappThis
+description: View and manage your SnappThis groups, and create new ones.
 ---
 {% from "components/header.html" import header %}
 
 {{ header(title="Your groups", showBackButton=true) }}
 
-{% include "components/group-list.html" %}
+<main>
+    {% include "components/group-list.html" %}
+</main>
 
 {% include "components/footer.html" %}

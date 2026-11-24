@@ -1,6 +1,7 @@
 ---
 layout: layouts/base.html
-title: Your groups
+title: Your groups | SnappThis
+description: View and manage your SnappThis groups, and create new ones.
 pagination:
   data: groups
   size: 1
@@ -14,6 +15,8 @@ permalink: "/groups/menu/{{ menuGroup.slug }}/"
 {{ header(title="Your groups", showBackButton=true) }}
 
 {% set openMenu = menuGroup.slug %}
-{% include "components/group-list.html" %}
+<main>
+    {% include "components/group-list.html" %}
+</main>
 
 {% include "components/footer.html" %}

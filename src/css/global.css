@@ -17,7 +17,7 @@ html {
 
 @font-face {
     font-family: 'Bariol-Regular';
-    src: url('../fonts/Bariol_Regular.otf') format('opentype');
+    src: url('/fonts/Bariol_Regular.woff2') format('woff2');
     font-display: swap;
 }
 
@@ -75,7 +75,7 @@ button {
 
     .group-list-stats p {
         font-size: var(--font-size-p);
-        color: var(--color-accent-blue-white-50);
+        color: var(--color-accent-blue-white-20);
     }
 
     .group-list-interactive {
@@ -185,15 +185,35 @@ header {
 
 /* Groepsmenu: pijltje in de groepenlijst (uit groups/+page.svelte, branch 283-task/group-menu-arrow-and-remove-roll) */
 
+/* Geen bolletjes voor de groepen (role="list" in de HTML houdt het voor screenreaders een lijst).
+   Alleen in 11ty: deze regel geldt ook voor de lijst op de detailpagina, omdat de CSS niet scoped is */
+.groups {
+    list-style: none;
+}
+
 /* Kleine afstand tussen de groepsnaam en het pijltje */
 .group-list-container {
     gap: var(--spacing-xs);
 }
 
-/* De naam niet laten meegroeien (.groups a heeft flex: 1), zodat het pijltje er direct naast staat.
+/* De naam is zo breed als de tekst, zodat het pijltje er direct naast staat.
+   Te lang voor het scherm? Dan krimpt de naam en eindigt hij op "…"
    Alleen in 11ty: .groups ervoor, anders wint .groups a (Svelte maakt de selector zelf specifieker met een scope-class) */
 .groups .group-link {
-    flex: none;
+    flex: 0 1 auto;
+    min-width: 0;
+
+    .group-list-stats {
+        min-width: 0;
+    }
+
+    /* Kleiner op heel smalle schermen, zodat de iconen in beeld blijven */
+    h2 {
+        font-size: clamp(1.25rem, 6vw, var(--font-size-h3));
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
 }
 
 /* De iconen rechts houden: de lege ruimte komt links van de iconen */
@@ -208,11 +228,12 @@ header {
     justify-content: center;
     width: 2rem;
     color: var(--color-accent-blue-white-20);
+}
 
-    &:focus-visible {
-        outline: 2px solid var(--color-accent-blue-black-30);
-        outline-offset: -2px;
-    }
+/* Alle links in de rij krijgen dezelfde focusrand: de naam, het pijltje en de iconen */
+.group-list-container a:focus-visible {
+    outline: 2px solid var(--color-accent-blue-black-30);
+    outline-offset: 2px;
 }
 
 .menu-icon {
@@ -265,7 +286,7 @@ header {
     display: grid;
     gap: 0.25rem;
 
-    @container (min-width: 768px) {
+    @container (min-width: 736px) {
         grid-template-columns: repeat(2, max-content); /* 2 kolommen, zo breed als de tekst */
         gap: var(--spacing-m);
     }
