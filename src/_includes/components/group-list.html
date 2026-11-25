@@ -6,7 +6,8 @@
 
         {# id: de link naar het menu eindigt op #slug, zodat je na het klikken bij deze groep blijft #}
         <li id="{{ group.slug }}">
-            <div class="group-list-container">
+            {# data-slug: zodat long-press.js weet welke groep het is #}
+            <div class="group-list-container" data-slug="{{ group.slug }}">
                 <a href="/groups/{{ group.slug }}" class="group-link">
                     <div class="group-list-stats">
                         <h2>{{ group.name }}</h2>

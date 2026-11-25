@@ -185,10 +185,41 @@ header {
 
 /* Groepsmenu: pijltje in de groepenlijst (uit groups/+page.svelte, branch 283-task/group-menu-arrow-and-remove-roll) */
 
-/* Geen bolletjes voor de groepen (role="list" in de HTML houdt het voor screenreaders een lijst).
+/* De breedte van de lijst meten, zodat het pijltje met @container kan reageren.
+   Geen bolletjes voor de groepen (role="list" in de HTML houdt het voor screenreaders een lijst).
    Alleen in 11ty: deze regel geldt ook voor de lijst op de detailpagina, omdat de CSS niet scoped is */
 .groups {
+    container-type: inline-size;
     list-style: none;
+}
+
+/* Lang indrukken staat aan (long-press.js zet .enhanced, net als hasJs in SnappThis) */
+.enhanced {
+    .group-list-container {
+        -webkit-touch-callout: none; /* iOS: geen eigen menu van de telefoon bij lang indrukken */
+        user-select: none; /* geen tekst selecteren bij lang indrukken */
+    }
+
+    /* Mobiel: alleen lang indrukken (keuze opdrachtgever). Het pijltje is visueel verborgen (WebAIM-techniek),
+    ook als het menu open is, maar een screenreader leest het nog voor en bij toetsenbordfocus is het zichtbaar */
+    .menu-link:not(:focus-visible) {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip-path: inset(50%);
+        white-space: nowrap;
+
+        /* Desktop: pijltje weer gewoon in beeld */
+        @container (min-width: 768px) {
+            position: static;
+            width: 2rem;
+            height: auto;
+            overflow: visible;
+            clip-path: none;
+            white-space: normal;
+        }
+    }
 }
 
 /* Kleine afstand tussen de groepsnaam en het pijltje */
