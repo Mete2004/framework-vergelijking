@@ -12,6 +12,8 @@
 
 **11ty:** framework-11ty.netlify.app
 
+**next:** framework-next.netlify.app
+
 ## Beschrijving
 <!-- In de Beschrijving staat hoe je project er uit ziet, hoe het werkt en wat je er mee kan. -->
 <!-- Voeg een mooie poster visual toe 📸 -->
