@@ -1,5 +1,7 @@
 # build output
 dist/
+# Netlify-adapter (servercode voor Netlify Functions, wordt bij de build gemaakt)
+.netlify/
 # generated types
 .astro/
 

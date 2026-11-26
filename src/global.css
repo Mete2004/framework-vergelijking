@@ -1,0 +1,99 @@
+/* Algemeen */
+*,
+*::before,
+*::after {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-family: 'Bariol-Regular', Verdana, Geneva, Tahoma, sans-serif;
+
+    @media (prefers-reduced-motion: no-preference) {
+        scroll-behavior: smooth;
+    }
+}
+
+@font-face {
+    font-family: 'Bariol-Regular';
+    src: url('/fonts/Bariol_Regular.woff2') format('woff2');
+    font-display: swap;
+}
+
+@view-transition {
+    navigation: auto;
+}
+
+body {
+    margin-bottom: var(--bar-height);
+}
+
+/* button */
+button {
+    font: inherit;
+    color: inherit;
+    background: none;
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+}
+
+/* Groups.svelte */
+
+.groups {
+        min-width: 223px;
+    }
+
+    .groups a {
+        text-decoration: none;
+        color: var(--color-accent-blue);
+        display: flex;
+        align-items: center;
+        flex: 1;
+    }
+
+    .group-list-container {
+        border-bottom: var(--color-accent-blue-white-50) 1px solid;
+        padding-inline: var(--spacing-s);
+        display: flex;
+        justify-content: space-between;
+        height: var(--bar-height);
+    }
+
+    .group-list-stats {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .group-list-stats h2 {
+        line-height: 1.25;
+        font-size: var(--font-size-h3);
+        font-weight: 400;
+    }
+
+    .group-list-stats p {
+        font-size: var(--font-size-p);
+        color: var(--color-accent-blue-white-20);
+    }
+
+    .group-list-interactive {
+        display: flex;
+        align-items: center;
+        gap: .5rem;
+
+        svg {
+            /* de SVG's gebruiken currentColor, dus deze kleur bepaalt de kleur van de icoontjes */
+            color: var(--color-accent-blue-white-20);
+            transition: var(--transition-duration);
+
+            @media (any-pointer:fine) {
+                &:hover {
+                    cursor: pointer;
+                    scale: var(--hover-scale);
+                }
+            }
+        }
+    }
+

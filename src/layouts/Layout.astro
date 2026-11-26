@@ -1,0 +1,21 @@
+---
+// Basis van elke pagina, net als app.html + +layout.svelte in SnappThis.
+import '../global.css';
+import '../styleguide.css';
+
+// Alleen als de pagina ze zelf meegeeft, net als <svelte:head> in SnappThis. De detailpagina heeft er geen.
+const { title, description } = Astro.props;
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="text-scale" content="scale" />
+		{title && <title>{title}</title>}
+		{description && <meta name="description" content={description} />}
+	</head>
+	<body>
+		<slot />
+	</body>
+</html>
