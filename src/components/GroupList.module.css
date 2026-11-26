@@ -1,0 +1,100 @@
+/* Uit de <style> van groups/+page.svelte */
+
+/* De breedte van de lijst meten, zodat het pijltje met @container kan reageren */
+.groups {
+    container-type: inline-size;
+    list-style: none;
+}
+
+/* Kleine afstand tussen de groepsnaam en het pijltje */
+.group-list-container {
+    gap: var(--spacing-xs);
+}
+
+/* De naam is zo breed als de tekst, zodat het pijltje er direct naast staat.
+   Te lang voor het scherm? Dan krimpt de naam en eindigt hij op "…"
+   Alleen in Next.js (net als 11ty): .groups ervoor, anders wint .groups a uit global.css.
+   Svelte maakt de selector zelf specifieker met een scope-class, een CSS Module niet. */
+.groups .group-link {
+    flex: 0 1 auto;
+    min-width: 0;
+
+    .group-list-stats {
+        min-width: 0;
+    }
+
+    /* Kleiner op heel smalle schermen, zodat de iconen in beeld blijven */
+    h2 {
+        font-size: clamp(1.25rem, 6vw, var(--font-size-h3));
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+}
+
+/* De iconen rechts houden: de lege ruimte komt links van de iconen */
+.group-list-interactive {
+    margin-left: auto;
+}
+
+/* Pijltje rechts van de groepsnaam. Zelfde kleur als de iconen: wit haalt op de lichte achtergrond het contrast van 3:1 niet (WCAG 1.4.11).
+   Alleen in Next.js: .groups ervoor, om dezelfde reden als bij .group-link */
+.groups .menu-link {
+    flex: none; /* niet meegroeien zoals de groepsnaam-link (.groups a in global.css) */
+    justify-content: center;
+    width: 2rem;
+    color: var(--color-accent-blue-white-20);
+}
+
+/* Alle links in de rij krijgen dezelfde focusrand: de naam, het pijltje en de iconen */
+.group-list-container a:focus-visible {
+    outline: 2px solid var(--color-accent-blue-black-30);
+    outline-offset: 2px;
+}
+
+.menu-icon {
+    width: 2rem;
+    height: 2rem;
+    fill: none;
+    stroke: currentColor; /* de lijn krijgt de tekstkleur van de link */
+    stroke-width: 2;
+
+    /* Alleen draaien met animatie als de gebruiker geen minder beweging wil, net als de + in de header */
+    @media (prefers-reduced-motion: no-preference) {
+        transition: rotate var(--transition-duration);
+    }
+}
+
+/* Menu open: pijltje draait naar boven */
+.menu-link.open .menu-icon {
+    rotate: 180deg;
+}
+
+/* Alleen met JavaScript: lang indrukken werkt, dus het pijltje hoeft op mobiel niet in beeld */
+.enhanced {
+    .group-list-container {
+        -webkit-touch-callout: none; /* iOS: geen eigen menu van de telefoon bij lang indrukken */
+        user-select: none; /* geen tekst selecteren bij lang indrukken */
+    }
+
+    /* Mobiel: alleen lang indrukken (keuze opdrachtgever). Het pijltje is visueel verborgen (WebAIM-techniek),
+    ook als het menu open is, maar een screenreader leest het nog voor en bij toetsenbordfocus is het zichtbaar */
+    .menu-link:not(:focus-visible) {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip-path: inset(50%);
+        white-space: nowrap;
+
+        /* Desktop: pijltje weer gewoon in beeld */
+        @container (min-width: 768px) {
+            position: static;
+            width: 2rem;
+            height: auto;
+            overflow: visible;
+            clip-path: none;
+            white-space: normal;
+        }
+    }
+}
