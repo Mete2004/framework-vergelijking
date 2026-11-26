@@ -1,0 +1,64 @@
+---
+// Header uit SnappThis (organisms/Header.svelte). De pagina geeft de props mee.
+const { title = '', showBackButton = false, backUrl = '/' } = Astro.props;
+---
+
+<header class="top-nav">
+	{showBackButton && (
+		// Back navigation
+		<a href={backUrl} class="go-back-link" aria-label="Go back">
+			<svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+				<title>Go back</title>
+				<path
+					fill-rule="evenodd"
+					clip-rule="evenodd"
+					d="M7.6 14L18.8 2.8L16 0L0 16L16 32L18.8 29.2L7.6 18H32V14H7.6Z"
+				/>
+			</svg>
+		</a>
+	)}
+
+	<h1 class="title">{title}</h1>
+</header>
+
+<style>
+	/* Uit de <style> van organisms/Header.svelte (zonder de +, die bouwen we niet na) */
+	header {
+		display: grid;
+		grid-template-columns: 1fr 1fr 1fr;
+		align-items: center;
+		padding-inline: var(--spacing-header-inline);
+		height: var(--bar-height);
+		background-color: var(--color-accent-blue-black-30);
+		color: var(--color-white);
+		position: sticky;
+		top: 0;
+		z-index: 1;
+	}
+
+	.title {
+		grid-column: 2;
+		font-size: var(--font-size-h3);
+		width: max-content;
+		justify-self: center;
+	}
+
+	/* Back button */
+	.go-back-link {
+		display: inline-block;
+		transition: 0.1s;
+		width: fit-content;
+
+		@media (any-pointer: fine) {
+			&:hover {
+				scale: 1.15;
+			}
+		}
+
+		svg {
+			height: calc(var(--bar-height) * 0.40);
+			width: auto;
+			fill: var(--color-white);
+		}
+	}
+</style>

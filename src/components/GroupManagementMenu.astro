@@ -1,0 +1,80 @@
+---
+// Groepsmenu uit SnappThis (organisms/GroupManagementMenu.svelte).
+// Net als in 11ty en Next.js alleen open en dicht: de knoppen versturen niets (geen form, type="button").
+---
+
+<div class="group-menu">
+	<div class="options">
+		<button type="button" class="option">
+			<svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+				<path d="M14 4h5v16h-5M3 12h11M7 8l-4 4 4 4" />
+			</svg>
+			Leave this group
+		</button>
+
+		<button type="button" class="option">
+			<svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+				<path d="M5 5l14 14M19 5L5 19" />
+			</svg>
+			Delete this group
+		</button>
+	</div>
+</div>
+
+<style>
+	/* Uit de <style> van organisms/GroupManagementMenu.svelte */
+	.group-menu {
+		container-type: inline-size; /* de breedte van het menu meten, zodat @container werkt */
+		position: relative;
+		padding: var(--spacing-s);
+		background-color: var(--color-accent-blue-white-90);
+
+		/* Driehoekje boven het menu (op de oude plek, zie sprint review) */
+		&::before {
+			content: '';
+			position: absolute;
+			top: -0.6rem;
+			/* vaste plek links, op het oog bijgesteld */
+			left: calc(.05rem + 1rem - 0.6rem);
+			width: 1.2rem;
+			height: 0.6rem;
+			background-color: var(--color-accent-blue-white-90);
+			clip-path: polygon(50% 0, 100% 100%, 0 100%); /* knipt een driehoek uit het vlak */
+		}
+	}
+
+	.options {
+		display: grid;
+		gap: 0.25rem;
+
+		@container (min-width: 736px) {
+			grid-template-columns: repeat(2, max-content); /* 2 kolommen, zo breed als de tekst */
+			gap: var(--spacing-m);
+		}
+	}
+
+	.option {
+		display: flex;
+		align-items: center;
+		gap: var(--spacing-s);
+		min-height: 2.75rem; /* groot genoeg om op te tikken */
+		width: 100%;
+		color: var(--color-accent-blue-white-20);
+		font-size: var(--font-size-h5);
+		text-align: left;
+		cursor: pointer;
+
+		&:focus-visible {
+			outline: 2px solid var(--color-accent-blue-black-30);
+			outline-offset: 2px;
+		}
+	}
+
+	.icon {
+		width: 1.4rem;
+		height: 1.4rem;
+		fill: none;
+		stroke: currentColor;
+		stroke-width: 2;
+	}
+</style>
